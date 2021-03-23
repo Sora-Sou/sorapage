@@ -47,7 +47,7 @@ def comment_initial():
             uid INT,
             name VARCHAR(20),
             email VARCHAR(30),
-            comment VARCHAR(200),
+            comment VARCHAR(400),
             time TIMESTAMP,
             parent INT,
             replyTo INT,

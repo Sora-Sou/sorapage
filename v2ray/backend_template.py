@@ -57,8 +57,8 @@ def update_user_traffic():
     user_list = sql_cursor.fetchall()
     for user in user_list:
         # shell traffic query
-        down_shell = f'''v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "user>>>{user['email']}>>>traffic>>>downlink" reset: true' '''
-        up_shell = f'''v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "user>>>{user['email']}>>>traffic>>>uplink" reset: true' '''
+        down_shell = f'''/usr/local/bin/v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "user>>>{user['email']}>>>traffic>>>downlink" reset: true' '''
+        up_shell = f'''/usr/local/bin/v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "user>>>{user['email']}>>>traffic>>>uplink" reset: true' '''
         shell_down_traffic = traffic_query(down_shell)
         shell_up_traffic = traffic_query(up_shell)
         # SQL traffic query
@@ -91,10 +91,10 @@ def update_node_traffic():
         inbound_tag = "in" + str(node['port'])
         outbound_tag = "out" + str(node['port'])
         shell_list = [
-            f'''v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "outbound>>>{outbound_tag}>>>traffic>>>uplink" reset: true' ''',
-            f'''v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "outbound>>>{outbound_tag}>>>traffic>>>downlink" reset: true' ''',
-            f'''v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "inbound>>>{inbound_tag}>>>traffic>>>uplink" reset: true' ''',
-            f'''v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "inbound>>>{inbound_tag}>>>traffic>>>downlink" reset: true' '''
+            f'''/usr/local/bin/v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "outbound>>>{outbound_tag}>>>traffic>>>uplink" reset: true' ''',
+            f'''/usr/local/bin/v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "outbound>>>{outbound_tag}>>>traffic>>>downlink" reset: true' ''',
+            f'''/usr/local/bin/v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "inbound>>>{inbound_tag}>>>traffic>>>uplink" reset: true' ''',
+            f'''/usr/local/bin/v2ctl api --server=127.0.0.1:20000 StatsService.GetStats 'name: "inbound>>>{inbound_tag}>>>traffic>>>downlink" reset: true' '''
         ]
         shell_traffic = {
             # property data type is int
