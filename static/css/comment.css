@@ -90,3 +90,8 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+
+.media_name_div {
+    display: flex;
+    align-items: center;
+}

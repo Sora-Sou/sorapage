@@ -14,11 +14,11 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <input type="text" name="name" placeholder="昵称" class="comment_input" id="comment_name"
-                           value="{{ session['user_name'] }}">
+                           value="{{ session['user_name'] }}" {% if session['user_name'] %}readonly{% endif %}>
                 </div>
                 <div class="col-12 col-md-6">
                     <input type="email" name="email" placeholder="邮箱" class="comment_input" id="comment_email"
-                           value="{{ session['user_email'] }}">
+                           value="{{ session['user_email'] }}" {% if session['user_name'] %}readonly{% endif %}>
                 </div>
             </div>
             <textarea name="comment" placeholder="Comment Here~" id="comment_textarea"></textarea>
@@ -26,6 +26,7 @@
                 <button type="button" class="btn btn-primary" id="submit_comment" data-comment-type="parent">评论
                 </button>
             </div>
+            <input type="hidden" name="uid" id="uid" value="{{ session['uid'] }}">
             <input type="hidden" name="parent" id="comment_parent">
             <input type="hidden" name="replyTo" id="comment_replyTo">
             <input type="hidden" name="replyToSeq" id="comment_replyToSeq">
@@ -39,7 +40,7 @@
         <div class="modal-content">
             <div class="modal-body" id="fail_comment_cause"></div>
             <div id="fail_comment_close" class="p-2">
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#fail_comment">
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#fail_comment_modal">
                     明白
                 </button>
             </div>

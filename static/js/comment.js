@@ -1,14 +1,21 @@
 function media(comment_obj) {
-    var media = $('<div></div>').addClass('media');
-    var avatar = $('<img>').attr({src: '/static/img/avatar.png', width: '64px'})
-    var media_body = $('<div></div>').addClass('media-body').attr('data-comment-id', comment_obj['id'])
+    let media = $('<div></div>').addClass('media');
+    let avatar = $('<img>').attr({src: '/static/img/avatar.png', width: '64px'})
+    let media_body = $('<div></div>').addClass('media-body').attr('data-comment-id', comment_obj['id'])
 
 
-    var media_bar_1 = $('<div></div>').addClass('media_bar')
-    media_bar_1.append($('<h5></h5>').text(comment_obj['name']).addClass('mb-0'))
+    let media_bar_1 = $('<div></div>').addClass('media_bar')
+    let media_name_div = $('<div class="media_name_div"></div>')
+    media_name_div.append($('<h5></h5>').text(comment_obj['name']).addClass('mb-0'))
+    if (comment_obj['uid'] == '1') {
+        let badge = $('<span class="badge badge-primary ml-2"></span>')
+        badge.text('Sora')
+        media_name_div.append(badge)
+    }
+    media_bar_1.append(media_name_div)
     media_bar_1.append($('<p></p>').text('#' + comment_obj['sequence']).addClass(['text-muted', 'comment_sequence']))
 
-    var media_bar_2 = $('<div></div>').addClass('media_bar')
+    let media_bar_2 = $('<div></div>').addClass('media_bar')
     media_bar_2.append($('<small></small>').addClass('text-muted').text(comment_obj['time']))
     media_bar_2.append($('<button></button>').addClass(['btn', 'btn-link', 'btn_reply']).text('回复'))
 
@@ -32,16 +39,15 @@ function render(comment_json) {
             'justify-content': 'center'
         })
     } else {
-        for (var i = 0; i < comment_json['parent'].length; i++) {
+        for (let i = 0; i < comment_json['parent'].length; i++) {
             $('#comment_container').append(media(comment_json['parent'][i]))
-
             if (i != comment_json['parent'].length - 1) {
                 $('#comment_container').append($('<hr>'))
             }
         }
 
-        for (var i = 0; i < comment_json['child'].length; i++) {
-            var judge = "[data-comment-id='" + comment_json['child'][i]['parent'] + "']"
+        for (let i = 0; i < comment_json['child'].length; i++) {
+            let judge = "[data-comment-id='" + comment_json['child'][i]['parent'] + "']"
             $(judge).append($('<hr>'), media(comment_json['child'][i]))
         }
     }
@@ -78,7 +84,7 @@ window.onload = function () {
     $('#comment_container').on('click', '.btn_reply', function () {
         const comment_sequence = $(this).parent().prev().find('.comment_sequence').text()
         const comment_author = $(this).parent().prev().find('h5').text()
-        const comment_content = $(this).parent().nextAll('.comment_content').text()
+        const comment_content = $(this).parent().next().find('.comment_content').text()
         $('#comment_sequence').text(comment_sequence)
         $('#comment_author').text(comment_author)
         $('#comment_content').text(comment_content)

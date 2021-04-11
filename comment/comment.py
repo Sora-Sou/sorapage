@@ -86,7 +86,7 @@ def comment_ajax():
             sequence += str(len(sql_cursor.fetchall()) + 1)
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_cursor.execute(
-            f"INSERT INTO comment (url,name,email,comment,time,parent,replyTo,sequence,replyToSeq) VALUES ('{url}','{form['name']}','{form['email']}','{form['comment']}','{now}',{form['parent']},{form['replyTo']},'{sequence}','{form['replyToSeq']}')")
+            f"INSERT INTO comment (url,uid,name,email,comment,time,parent,replyTo,sequence,replyToSeq) VALUES ('{url}','{form['uid']}','{form['name']}','{form['email']}','{form['comment']}','{now}',{form['parent']},{form['replyTo']},'{sequence}','{form['replyToSeq']}')")
         sql_connect.commit()
         sql_cursor.close()
         sql_connect.close()

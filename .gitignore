@@ -4,6 +4,7 @@ v2ray/backend.py
 v2ray/clients
 trade/alipay_public_key.pem
 trade/app_private_key.pem
+smtp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
