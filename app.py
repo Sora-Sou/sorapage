@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from acgn.acgn import acgn
 from user.user import user
 from comment.comment import comment
@@ -21,7 +21,7 @@ app.config.from_pyfile('config.py')
 
 @app.route('/')
 def index():
-    return "SoraPage Project presents"
+    return render_template('temp_hp.html')
 
 
 if __name__ == '__main__':

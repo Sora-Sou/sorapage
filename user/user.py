@@ -12,7 +12,7 @@ def login():
         response = make_response(render_template('login.html'))
         if request.referrer is not None:
             response.set_cookie('referrer', request.referrer)
-        elif request.args['success'] is not None:
+        elif request.args.get('success') is not None:
             response.set_cookie('referrer', request.args['success'])
         else:
             response.set_cookie('referrer', '/')

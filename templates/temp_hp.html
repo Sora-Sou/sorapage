@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoraPage</title>
+    {% include 'libs.html' %}
+    <style>
+        .list_item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        svg {
+            height: 20px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4" style="max-width: 500px">
+        <h1>SoraPage Project</h1>
+        <hr>
+        <div class="list">
+            <h2>Systems</h2>
+            <div class="list_item">
+                <a href="http://pre.sorapage.com">Pre-SoraPage</a>
+                <span class="text-danger">Archived</span>
+            </div>
+            <div class="list_item">
+                <span class="text-muted">SoraPage</span>
+                <span class="text-muted">Future Release</span>
+            </div>
+            <div class="list_item">
+                <a href="/v2ray">SoraPort</a>
+                <span class="text-success">Running</span>
+            </div>
+            <div class="list_item">
+                <span class="text-muted">Budget</span>
+                <span class="text-muted">Private</span>
+            </div>
+        </div>
+        <div class="list">
+            <h2>Modules</h2>
+            <div class="list_item">
+                <span class="text-success">User</span>
+                <span class="text-success">1.1</span>
+            </div>
+            <div class="list_item">
+                <span class="text-muted">Admin</span>
+                <span class="text-muted">Future Release</span>
+            </div>
+            <div class="list_item">
+                <span class="text-muted">Email</span>
+                <span class="text-muted">Future Release</span>
+            </div>
+            <div class="list_item">
+                <span class="text-success">Comment</span>
+                <span class="text-success">1.6</span>
+            </div>
+            <div class="list_item">
+                <span class="text-success">Trade</span>
+                <span class="text-success">1.0</span>
+            </div>
+        </div>
+        <h5 class="d-flex flex-row-reverse">Developed by Sora</h5>
+        <script>
+            $('.list').children().after('<hr>');
+        </script>
+</body>
+
+</html>
