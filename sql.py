@@ -51,8 +51,6 @@ def comment_initial():
             time TIMESTAMP,
             parent INT,
             replyTo INT,
-            sequence VARCHAR(4),
-            replyToSeq VARCHAR(4),
             PRIMARY KEY(id)
         )'''
     )

@@ -76,17 +76,9 @@ def comment_ajax():
                 form[value] = 'NULL'
             else:
                 form[value] = key
-        if request.form['parent'] == '':
-            sql_cursor.execute(f"SELECT * FROM comment WHERE url='{url}' AND parent IS NULL ")
-            sequence = f"{len(sql_cursor.fetchall()) + 1}"
-        else:
-            sql_cursor.execute(f"SELECT sequence FROM comment WHERE id={form['parent']}")
-            sequence = f"{sql_cursor.fetchone()['sequence']}-"
-            sql_cursor.execute(f"SELECT * FROM comment WHERE url='{url}' AND parent={form['parent']}")
-            sequence += str(len(sql_cursor.fetchall()) + 1)
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_cursor.execute(
-            f"INSERT INTO comment (url,uid,name,email,comment,time,parent,replyTo,sequence,replyToSeq) VALUES ('{url}','{form['uid']}','{form['name']}','{form['email']}','{form['comment']}','{now}',{form['parent']},{form['replyTo']},'{sequence}','{form['replyToSeq']}')")
+            f"INSERT INTO comment (url,uid,name,email,comment,time,parent,replyTo) VALUES ('{url}','{form['uid']}','{form['name']}','{form['email']}','{form['comment']}','{now}',{form['parent']},{form['replyTo']})")
         sql_connect.commit()
         sql_cursor.close()
         sql_connect.close()

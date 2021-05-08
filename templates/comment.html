@@ -1,6 +1,6 @@
 <script src="{{ url_for('static',filename='js/comment.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static',filename='css/comment.css') }}">
-<div class="container-fluid" style="padding-left: 0;padding-right: 0;">
+<div class="container-fluid" style="padding-left: 0;padding-right: 0;" id="comment_outermost_container">
     <hr>
     <div class="bg-primary p-4 text-light rounded" id="reply_inform">
         <p>你即将回复 <span id="comment_sequence"></span> 的 <span id="comment_author"></span> 的评论：</p>
@@ -29,7 +29,6 @@
             <input type="hidden" name="uid" id="uid" value="{{ session['uid'] }}">
             <input type="hidden" name="parent" id="comment_parent">
             <input type="hidden" name="replyTo" id="comment_replyTo">
-            <input type="hidden" name="replyToSeq" id="comment_replyToSeq">
         </form>
     </div>
     <div id="comment_container" class="border rounded p-4 my-2"></div>

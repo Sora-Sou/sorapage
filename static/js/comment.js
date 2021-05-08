@@ -39,16 +39,57 @@ function render(comment_json) {
             'justify-content': 'center'
         })
     } else {
+        //render_parent
         for (let i = 0; i < comment_json['parent'].length; i++) {
+            comment_json['parent'][i]['sequence'] = comment_json['parent'].length - i;
             $('#comment_container').append(media(comment_json['parent'][i]))
             if (i != comment_json['parent'].length - 1) {
                 $('#comment_container').append($('<hr>'))
             }
         }
 
+        //render_child
+        function find_sequence(comment_id) {
+            let found = false;
+            for (let i = 0; i < comment_json['parent'].length; i++) {
+                if (comment_json['parent'][i]['id'] == comment_id) {
+                    found = true
+                    return comment_json['parent'][i]['sequence']
+                }
+            }
+            if (!found) {
+                for (let i = 0; i < comment_json['parent'].length; i++) {
+                    if (comment_json['child'][i]['id'] == comment_id) {
+                        found = true
+                        return comment_json['child'][i]['sequence']
+                    }
+                }
+            }
+        }
+
+        let parent = '0'
+        let next_sequence = 1
         for (let i = 0; i < comment_json['child'].length; i++) {
-            let judge = "[data-comment-id='" + comment_json['child'][i]['parent'] + "']"
-            $(judge).append($('<hr>'), media(comment_json['child'][i]))
+            //add attribute ”sequence“
+            let child_e = comment_json['child'][i]
+            if (i == 0) {
+                child_e['sequence'] = find_sequence(child_e['parent']) + '-1'
+                parent = child_e['parent']
+                next_sequence = 2
+            } else {
+                if (parent != comment_json['child'][i]['parent']) {
+                    parent = comment_json['child'][i]['parent']
+                    next_sequence = 1
+                } else {
+                    next_sequence++
+                }
+                child_e['sequence'] = find_sequence(child_e['parent']) + '-' + next_sequence
+            }
+            //add attribute "replyToSeq"
+            child_e['replyToSeq'] = find_sequence(child_e['replyTo'])
+            //append child
+            let parent_judge = "[data-comment-id='" + comment_json['child'][i]['parent'] + "']"
+            $(parent_judge).append($('<hr>'), media(comment_json['child'][i]))
         }
     }
     //判断登录状态
@@ -82,19 +123,18 @@ window.onload = function () {
     load()
     //回复功能
     $('#comment_container').on('click', '.btn_reply', function () {
-        const comment_sequence = $(this).parent().prev().find('.comment_sequence').text()
         const comment_author = $(this).parent().prev().find('h5').text()
         const comment_content = $(this).parent().next().find('.comment_content').text()
-        $('#comment_sequence').text(comment_sequence)
         $('#comment_author').text(comment_author)
         $('#comment_content').text(comment_content)
         $('#reply_inform').fadeIn()
         const replyTo = $(this).parents('.media-body').first().attr('data-comment-id')
-        const replyToSeq = $(this).parent().prev().find('.comment_sequence').text().slice(1)
-        parent = $(this).parents('.media-body').last().attr('data-comment-id')
+        const parent = $(this).parents('.media-body').last().attr('data-comment-id')
         $('#comment_parent').val(parent)
         $('#comment_replyTo').val(replyTo)
-        $('#comment_replyToSeq').val(replyToSeq)
+        // 跳转至评论框
+        const offset = $('#comment_outermost_container').offset().top
+        $('html, body').animate({scrollTop: offset}, 700);
     })
 
     $('#btn_cancel_reply').click(function () {
@@ -137,6 +177,7 @@ window.onload = function () {
                 success: function (data) {
                     reload(data);
                     $('#comment_textarea').val("");
+                    $('#reply_inform').fadeOut();
                     $('#submit_comment_modal').modal('hide');
                 }
             })
