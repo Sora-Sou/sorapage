@@ -187,6 +187,7 @@ window.onload = function () {
 
 //评论跳转功能
 function comment_scroll() {
+    //http://127.0.0.1:5000/v2ray/#comment21
     const hash = window.location.hash;
     const comment_reg = /comment(\d*)/;
     if (comment_reg.test(hash)) {
@@ -196,6 +197,7 @@ function comment_scroll() {
         $('.media-body').each(function () {
             if ($(this).attr('data-comment-id') === comment_id) {
                 offset = $(this).offset().top - 20;
+                $(this).children('.media_comment').css('background-color', 'rgba(13,110,253,0.2)')
             }
         })
         $('html, body').animate({scrollTop: offset}, 700);

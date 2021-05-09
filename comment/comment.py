@@ -4,6 +4,8 @@ from urllib.parse import urlparse
 from sql import connect_dictCursor
 from datetime import datetime
 
+from smtp.smtp import send_email
+
 
 def format_time(datetime_obj):
     timedelta_obj = datetime.now() - datetime_obj
@@ -79,7 +81,41 @@ def comment_ajax():
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_cursor.execute(
             f"INSERT INTO comment (url,uid,name,email,comment,time,parent,replyTo) VALUES ('{url}','{form['uid']}','{form['name']}','{form['email']}','{form['comment']}','{now}',{form['parent']},{form['replyTo']})")
+        comment_id = sql_connect.insert_id()
         sql_connect.commit()
+        # email to parent
+        if form['replyTo'] != 'NULL':
+            sql_cursor.execute(f"select * from comment where id={form['replyTo']}")
+            fetch = sql_cursor.fetchone()
+            html_render_info = {
+                'parent_name': fetch['name'],
+                'parent_comment': fetch['comment'],
+                'child_name': form['name'],
+                'child_comment': form['comment'],
+                'comment_url': 'http://sorapage' + url + '#comment' + str(comment_id)
+            }
+            email_title_info = {
+                'address': fetch['email'],
+                'subject': 'SoraPage评论回复通知'
+            }
+            send_email('comment_notify_parent.html',
+                       html_render_info=html_render_info,
+                       email_title_info=email_title_info)
+        # email to Sora
+        if form['uid'] != '1':
+            html_render_info = {
+                'url': 'http://sorapage' + url + '#comment' + str(comment_id),
+                'name': form['name'],
+                'email': form['email'],
+                'comment': form['comment']
+            }
+            email_title_info = {
+                'address': 'sora@sorapage.com',
+                'subject': 'SoraPage New Comment Notification'
+            }
+            send_email('comment_notify_sora.html',
+                       html_render_info=html_render_info,
+                       email_title_info=email_title_info)
         sql_cursor.close()
         sql_connect.close()
         return load(url)

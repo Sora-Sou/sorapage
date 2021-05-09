@@ -1,0 +1,96 @@
+<meta charset="UTF-8">
+<style>
+    a:link {
+        text-decoration: none !important;
+    }
+
+    a:visited {
+        text-decoration: none !important;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+    }
+
+    a:active {
+        text-decoration: none !important;
+    }
+
+    .comment {
+        background: #fafafa repeating-linear-gradient(-45deg, #fff, #fff 1.125rem, transparent 1.125rem, transparent 2.25rem);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        margin: 20px 0px;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #555555;
+    }
+
+    #container {
+        border-radius: 10px 10px 10px 10px;
+        font-size: 13px;
+        color: #555555;
+        width: 666px;
+        font-family: 'Century Gothic', 'Trebuchet MS', 'Hiragino Sans GB', 微软雅黑, 'Microsoft Yahei', Tahoma, Helvetica, Arial, 'SimSun', sans-serif;
+        margin: 50px auto;
+        max-width: 100%;
+        background: #ffffff repeating-linear-gradient(-45deg, #fff, #fff 1.125rem, transparent 1.125rem, transparent 2.25rem);
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    #title_div {
+        width: 100%;
+        background: #49BDAD;
+        color: #ffffff;
+        border-radius: 10px 10px 0 0;
+        background-image: -moz-linear-gradient(0deg, rgb(67, 198, 184), rgb(255, 209, 244));
+        background-image: -webkit-linear-gradient(0deg, rgb(67, 198, 184), rgb(255, 209, 244));
+        height: 66px;
+    }
+
+    #title_p {
+        font-size: 15px;
+        word-break: break-all;
+        padding: 23px 32px;
+        margin: 0;
+        background-color: hsla(0, 0%, 100%, .4);
+        border-radius: 10px 10px 0 0;
+    }
+
+    #title_a {
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    #content_div {
+        margin: 0px auto;
+        padding: 40px 0px;
+        width: 90%;
+    }
+
+    .footer_a {
+        text-decoration: none;
+        color: #12addb;
+    }
+</style>
+<div id="container">
+    <div id="title_div">
+        <p id="title_p">
+            你在<a href="http://sorapage.com" id="title_a">SoraPage</a>上的留言有新回复啦！
+        </p>
+    </div>
+    <div id="content_div">
+        <p>{{ info['parent_name'] }} 桑，你曾发表评论：</p>
+        <div class="comment">
+            {{ info['parent_comment'] }}
+        </div>
+        <p>{{ info['child_name'] }} 给您的回复如下：</p>
+        <div class="comment">
+            {{ info['child_comment'] }}
+        </div>
+        <p>
+            你可以点击<a href="{{ info['comment_url'] }}" class="footer_a">查看回复的完整內容</a>，欢迎再次光临
+            <a href="http://sorapage.com" class="footer_a"> SoraPage</a>。
+        </p>
+    </div>
+</div>
