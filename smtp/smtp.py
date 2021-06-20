@@ -1,5 +1,5 @@
 # send_email(html_name, html_render_info, email_title_info)
-# html_name 所有html模板文件均放置在smtp文件夹，顶层只提供文件名，底层自动拼接路径
+# html_name 所有html模板文件均放置在smtp文件夹，顶层只提供带后缀.html文件名，底层自动拼接路径
 # html_render_info 以object数据类型传参
 # email_title_info = {
 #     'address': 'receive@qq.com',

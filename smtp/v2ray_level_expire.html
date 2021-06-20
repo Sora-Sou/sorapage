@@ -1,2 +1,75 @@
-<h1>{{ info['name'] }}</h1>
-<p>你在<a href="http://sorapage.com/v2ray">SoraPort</a>的账号将在{{ info['expire_time'] }}等级过期，等级过期后账号仍将保留但无法继续使用，请及时续费</p>
+<meta charset="UTF-8">
+<style>
+    a:link {
+        text-decoration: none !important;
+    }
+
+    a:visited {
+        text-decoration: none !important;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+    }
+
+    a:active {
+        text-decoration: none !important;
+    }
+
+    #container {
+        border-radius: 10px 10px 10px 10px;
+        font-size: 15px;
+        color: #555555;
+        width: 666px;
+        margin: 50px auto;
+        max-width: 100%;
+        background: #ffffff repeating-linear-gradient(-45deg, #fff, #fff 1.125rem, transparent 1.125rem, transparent 2.25rem);
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    #title_div {
+        width: 100%;
+        background: #49BDAD;
+        color: #ffffff;
+        border-radius: 10px 10px 0 0;
+        background-image: -moz-linear-gradient(0deg, rgb(67, 198, 184), rgb(255, 209, 244));
+        background-image: -webkit-linear-gradient(0deg, rgb(67, 198, 184), rgb(255, 209, 244));
+        height: 66px;
+    }
+
+    #title_p {
+        word-break: break-all;
+        padding: 23px 32px;
+        margin: 0;
+        background-color: hsla(0, 0%, 100%, 0);
+        border-radius: 10px 10px 0 0;
+    }
+
+    #title_a {
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    #content_div {
+        margin: 0px auto;
+        padding: 20px 0 40px 0;
+        width: 90%;
+    }
+
+    #content_div a {
+        text-decoration: none;
+        color: #12addb;
+    }
+</style>
+<div id="container">
+    <div id="title_div">
+        <p id="title_p">
+            <a href="http://sorapage.com/v2ray" id="title_a" target="_blank">SoraPort</a> 订阅过期通知
+        </p>
+    </div>
+    <div id="content_div">
+        <h4>{{ info['user_name'] }} 桑:</h4>
+        <p>你在 <a href="http://sorapage.com/v2ray" target="_blank">SoraPort</a> 的订阅即将在 <b>{{ info['expire_date'] }}</b> 过期</p>
+        <p>如果你对 <a href="http://sorapage.com/v2ray" target="_blank">SoraPort</a> 提供的服务感到满意并希望继续使用的话，请及时续费，阿里嘎多~</p>
+    </div>
+</div>

@@ -31,7 +31,6 @@
         font-size: 13px;
         color: #555555;
         width: 666px;
-        font-family: 'Century Gothic', 'Trebuchet MS', 'Hiragino Sans GB', 微软雅黑, 'Microsoft Yahei', Tahoma, Helvetica, Arial, 'SimSun', sans-serif;
         margin: 50px auto;
         max-width: 100%;
         background: #ffffff repeating-linear-gradient(-45deg, #fff, #fff 1.125rem, transparent 1.125rem, transparent 2.25rem);
@@ -53,7 +52,7 @@
         word-break: break-all;
         padding: 23px 32px;
         margin: 0;
-        background-color: hsla(0, 0%, 100%, .4);
+        background-color: hsla(0, 0%, 100%, 0);
         border-radius: 10px 10px 0 0;
     }
 
@@ -76,7 +75,7 @@
 <div id="container">
     <div id="title_div">
         <p id="title_p">
-            你在<a href="http://sorapage.com" id="title_a">SoraPage</a>上的留言有新回复啦！
+            你在 <a href="http://sorapage.com" id="title_a" target="_blank">SoraPage</a> 上的留言有新回复啦！
         </p>
     </div>
     <div id="content_div">
@@ -89,8 +88,8 @@
             {{ info['child_comment'] }}
         </div>
         <p>
-            你可以点击<a href="{{ info['comment_url'] }}" class="footer_a">查看回复的完整內容</a>，欢迎再次光临
-            <a href="http://sorapage.com" class="footer_a"> SoraPage</a>。
+            你可以点击<a href="{{ info['comment_url'] }}" class="footer_a" target="_blank">查看回复的完整內容</a>，欢迎再次光临
+            <a href="http://sorapage.com" class="footer_a" target="_blank"> SoraPage</a>
         </p>
     </div>
 </div>
