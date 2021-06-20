@@ -12,8 +12,8 @@ from email.header import Header
 from email.utils import parseaddr, formataddr
 import os
 
-from flask import current_app
 from jinja2 import Template
+import smtp
 
 from config import SMTP_CONFIG
 
@@ -27,7 +27,7 @@ def send_email(html_name, html_render_info, email_title_info):
     from_addr = "sora@sorapage.com"
     receive_addr = [email_title_info['address']]
 
-    load_path = os.path.join(current_app.root_path, 'smtp/' + html_name)
+    load_path = os.path.join(os.path.split(smtp.__file__)[0], html_name)
     with open(load_path, encoding='utf-8') as html:
         template = Template(html.read())
         html_str = template.render(info=html_render_info)
