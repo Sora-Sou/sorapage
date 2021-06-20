@@ -24,6 +24,7 @@
         border-radius: 5px;
         font-size: 14px;
         color: #555555;
+        white-space: pre-wrap;
     }
 
     #container {
@@ -82,8 +83,6 @@
             <p>{{ info['name'] }}</p>
             <p>{{ info['email'] }}</p>
         </div>
-        <div class="comment">
-            {{ info['comment'] }}
-        </div>
+        <div class="comment">{{ info['comment'] }}</div>
     </div>
 </div>

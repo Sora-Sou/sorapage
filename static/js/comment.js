@@ -169,6 +169,13 @@ window.onload = function () {
                 $(this).removeClass('valid_input invalid_input');
             })
             $('#submit_comment_modal').modal('show');
+
+            function ajax_after_success() {
+                $('#comment_textarea').val("");
+                $('#reply_inform').fadeOut();
+                $('#submit_comment_modal').modal('hide');
+            }
+
             $.ajax({
                 url: '/comment',
                 data: $('#comment_form').serialize(),
@@ -176,9 +183,7 @@ window.onload = function () {
                 dataType: 'json',
                 success: function (data) {
                     reload(data);
-                    $('#comment_textarea').val("");
-                    $('#reply_inform').fadeOut();
-                    $('#submit_comment_modal').modal('hide');
+                    setTimeout(ajax_after_success, 500)
                 }
             })
         }

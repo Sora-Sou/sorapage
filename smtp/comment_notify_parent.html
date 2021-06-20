@@ -24,6 +24,7 @@
         border-radius: 5px;
         font-size: 14px;
         color: #555555;
+        white-space: pre-wrap;
     }
 
     #container {
@@ -80,13 +81,9 @@
     </div>
     <div id="content_div">
         <p>{{ info['parent_name'] }} 桑，你曾发表评论：</p>
-        <div class="comment">
-            {{ info['parent_comment'] }}
-        </div>
+        <div class="comment">{{ info['parent_comment'] }}</div>
         <p>{{ info['child_name'] }} 给您的回复如下：</p>
-        <div class="comment">
-            {{ info['child_comment'] }}
-        </div>
+        <div class="comment">{{ info['child_comment'] }}</div>
         <p>
             你可以点击<a href="{{ info['comment_url'] }}" class="footer_a" target="_blank">查看回复的完整內容</a>，欢迎再次光临
             <a href="http://sorapage.com" class="footer_a" target="_blank"> SoraPage</a>
