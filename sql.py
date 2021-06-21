@@ -155,14 +155,14 @@ def v2ray_initial():
             relay_port int,
             order_ int,
             node_level int,
-            in_up bigint,
-            in_down bigint,
-            out_up bigint,
-            out_down bigint,
-            today_in_up bigint,
-            today_in_down bigint,
-            today_out_up bigint,
-            today_out_down bigint
+            in_up bigint default 0,
+            in_down bigint default 0,
+            out_up bigint default 0,
+            out_down bigint default 0,
+            today_in_up bigint default 0,
+            today_in_down bigint default 0,
+            today_out_up bigint default 0,
+            today_out_down bigint default 0
         )'''
     )
     sql_connect.commit()
@@ -173,10 +173,10 @@ def v2ray_initial():
             last_v2ray_login timestamp,
             user_level int,
             level_expire timestamp,
-            up bigint,
-            down bigint,
-            today_up bigint,
-            today_down bigint
+            up bigint default 0,
+            down bigint default 0,
+            today_up bigint default 0,
+            today_down bigint default 0
         )
         '''
     )
