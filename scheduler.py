@@ -30,14 +30,14 @@ def v2ray_database_update():
 
 def v2ray_expire_email():
     now = datetime.now()
-    threshold = (now + timedelta(days=3)).day
+    three_days_after = now + timedelta(days=3)
     sql_connect, sql_cursor = connect_dictCursor()
     sql_cursor.execute("select u.name_,u.email,v.level_expire from users u inner join v2ray_user v on u.uid=v.uid")
     users = sql_cursor.fetchall()
     sql_cursor.close()
     sql_connect.close()
     for user in users:
-        if user['level_expire'].day == threshold:
+        if user['level_expire'].strftime("%Y%m%d") == three_days_after.strftime("%Y%m%d"):
             html_render_info = {
                 'user_name': user['name_'],
                 'expire_date': user['level_expire'].strftime("%Y年%m月%d日")
