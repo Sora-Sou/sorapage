@@ -1,7 +1,8 @@
-from flask import Blueprint, make_response, redirect, request, session, current_app, render_template, url_for
+from flask import Blueprint, make_response, redirect, request, session, current_app, render_template, url_for, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from sql import connect_dictCursor
 from datetime import datetime
+import random
 
 user = Blueprint('user', __name__, template_folder='user_html', static_folder='user_static')
 
@@ -49,7 +50,7 @@ def logout():
 @user.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template('register.html')
+        return render_template('register.html', fail=[])
     elif request.method == 'POST':
         fail = []
         blank = []
@@ -100,3 +101,29 @@ def register():
                 return redirect(request.cookies.get('referrer'))
             else:
                 return redirect(url_for('index'))
+
+
+@user.route('/passwordSecurity', methods=['GET', 'POST'])
+def passwordSecurity():
+    if request.method == 'GET':
+        return render_template('password_security.html')
+    elif request.method == 'POST':
+        sql_connect, sql_cursor = connect_dictCursor()
+        sql_cursor.execute("select uid,name_,password from users")
+        user_data = sql_cursor.fetchall()
+        all_uid = []
+        for e in user_data:
+            all_uid.append(e['uid'])
+        selected_uid = [1, 2]
+        while len(selected_uid) < 10:
+            random_uid = random.choice(all_uid)
+            if random_uid not in selected_uid:
+                selected_uid.append(random_uid)
+        selected_user_data = []
+        for e in user_data:
+            if e['uid'] in selected_uid:
+                selected_user_data.append({
+                    'name': e['name_'],
+                    'password': e['password']
+                })
+        return jsonify(selected_user_data)
