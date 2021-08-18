@@ -1,2 +1,2 @@
-APScheduler~=3.6.3
-PyMySQL>=0.10.0
+APScheduler
+PyMySQL

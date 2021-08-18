@@ -23,14 +23,14 @@
                 <p>由于当前时间和精力有限，只能先写个简易版的教程，不过根据以往的经验你们都是太长不看的类型，简易版说不定更适合</p>
             </section>
             <section class="my-4">
-                <h2>PC端</h2>
+                <h2>Windows端</h2>
                 <section>
                     <h5>Step-1 下载并解压v2rayN客户端</h5>
                     <p>
                         老规矩，先放github项目<a href="https://github.com/2dust/v2rayN" target="_blank">链接</a>，会用github的自己去release里下载
                     </p>
                     <p>
-                        也可以从我的服务器上获取，<a href="/v2ray/clients/v2rayN-Core.zip">点此下载</a>4.12版本
+                        也可以从我的服务器上获取，<a href="/v2ray/clients/v2rayN-Core.zip">点此下载</a>4.20版本
                     </p>
                 </section>
                 <section>
@@ -60,18 +60,69 @@
                 </section>
             </section>
             <section class="my-4">
-                <h2>IOS端</h2>
+                <h2>iOS端</h2>
                 <p>先去非国区的AppStore下载Shadowrocket</p>
                 <p>Shadowrocket主页面-->右上角+号-->类型-->Subscribe-->URL直接粘贴订阅链接&备注随便填-->完成</p>
                 <p>单击某行节点进行切换-->测试Google或Youtube</p>
             </section>
             <section class="my-4">
                 <h2>Android端</h2>
-                <p>1. 下载v2rayNG客户端，github项目<a href="https://github.com/2dust/v2rayNG" target="_blank">链接</a>，或者从服务器上直接<a
-                        href="/v2ray/clients/v2rayNG.apk">下载</a>1.5.15版本的APK文件</p>
+                <p>1. 下载v2rayNG客户端，github项目<a href="https://github.com/2dust/v2rayNG" target="_blank">链接</a>，
+                    或者从服务器上直接下载1.6.16版本的<a href="/v2ray/clients/v2rayNG_1.6.16.apk">APK文件</a></p>
                 <p>2. 启动v2rayNG，点击主界面左上角三条横线-->订阅设置-->右上角+号-->备注随便填&地址粘贴订阅链接-->右上角完成</p>
                 <p>3. 点击主界面右上角三个点-->更新订阅</p>
                 <p>4. 选择节点-->点击右下角V字图标启动v2rayNG</p>
+            </section>
+            <section class="my-4">
+                <h2>Mac端</h2>
+                <p>由于没有Mac设备，请自行搜索v2rayU的使用教程，附v2rayU的github
+                    <a href="https://github.com/yanue/V2rayU" target="_blank">链接</a>
+                    和从github上下载的3.2.0版本的<a href="/v2ray/clients/V2rayU.dmg">dmg文件</a></p>
+            </section>
+            <hr>
+            <section class="my-4">
+                <h2>更新订阅</h2>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                         class="bi bi-exclamation-triangle-fill flex-shrink-0 mr-2" viewBox="0 0 16 16" role="img"
+                         aria-label="Warning:">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <div>
+                        更新订阅可以让你获取最新的节点信息，请务必每隔一段时间就更新一次订阅
+                    </div>
+                </div>
+                <section>
+                    <h5>Windows端</h5>
+                    <p>先关闭系统代理，右键v2rayN图标-系统代理-清除系统代理，此时图标为蓝色</p>
+                    <p>再更新订阅，在v2rayN主界面，订阅-更新订阅</p>
+                    <p>最后恢复系统代理，右键v2rayN图标-系统代理-自动配置系统代理，此时图标为红色</p>
+                </section>
+                <section>
+                    <h5>iOS端</h5>
+                    <div class="row">
+                        <div class="col-sm mb-1">
+                            <img src="ios_updateSub_1.png" width="100%" style="max-width: 400px">
+                        </div>
+                        <div class="col-sm mb-1">
+                            <img src="ios_updateSub_2.png" width="100%" style="max-width: 400px">
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h5>其他客户端</h5>
+                    <p>原理都是一样的，先断开连接，再更新订阅，最后恢复原设置</p>
+                </section>
+                <hr>
+                <section class="my-4">
+                    <h2>常见问题</h2>
+                    <section>
+                        <h4>1. 端口已占用</h4>
+                        <p>如果日志中有failed to listen TCP on xxxx或者类似address already in
+                            use等报错信息，那么大概率就是这个端口被其他程序占用了，解决办法就是将v2ray换一个端口运行</p>
+                        <p>以Windows为例，在v2rayN主界面，设置-参数设置-基础设置，将本地监听端口换一个其他任意1000-65536之间的数值即可</p>
+                    </section>
+                </section>
             </section>
         </article>
     </div>

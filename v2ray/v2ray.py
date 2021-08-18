@@ -103,11 +103,11 @@ def tutorial():
 
 @v2ray.route('/clients/<file_name>')
 def get_clients(file_name):
-    if file_name == "v2rayN-Core.zip":
-        return send_file(os.path.join(current_app.root_path, 'v2ray/clients/v2rayN-Core.zip'))
-    elif file_name == "v2rayNG.apk":
-        return send_file(os.path.join(current_app.root_path, 'v2ray/clients/v2rayNG.apk'))
+    files = ['v2rayN-Core.zip', 'v2rayNG_1.6.16.apk', 'V2rayU.dmg']
+    if file_name in files:
+        return send_file(os.path.join(current_app.root_path, f'v2ray/clients/{file_name}'))
     else:
+        print(file_name)
         return abort(404)
 
 
