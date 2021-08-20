@@ -11,6 +11,11 @@ from config import V2RAY_CONFIG, SQL
 v2ray = Blueprint('v2ray', __name__, template_folder='', static_folder='', url_prefix='/v2ray')
 
 
+@v2ray.route('/dev')
+def interface_dev():
+    return render_template('v2ray_interface_dev.html')
+
+
 @v2ray.route('/')
 def interface():
     def traffic_unit_convert(t_sum):

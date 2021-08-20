@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoraPort</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/soraport.ico') }}">
+    {% include "libs.html" %}
+    <style>
+        #nav_header {
+            background-color: rgb(40, 40, 40);
+            color: rgb(0, 191, 255);
+            padding: 0.5625rem 1rem;
+        }
+
+        #web_name {
+            font-size: 1.5rem;
+        }
+
+        #web_icon {
+            height: 1.5rem;
+            width: 1.5rem;
+            fill: rgb(0, 191, 255);
+        }
+
+        #nav_header_toggler {
+            fill: rgb(0, 191, 255);
+        }
+
+        .toggler_sidebar_showing {
+            transform: rotate(-90deg);
+            transition: transform 0.5s;
+            fill: #fd7e14 !important;
+        }
+
+        .toggler_sidebar_hiding {
+            transform: rotate(0deg);
+            transition: transform 0.5s;
+            fill: rgb(0, 191, 255);
+        }
+
+        #sidebar {
+            position: fixed;
+            left: -200px;
+            height: 100%;
+            width: 200px;
+            background-color: rgba(40, 40, 40, 0.95);
+        }
+
+        .sidebar_showing {
+            transition: left 1s;
+            left: 0 !important;
+        }
+
+        .sidebar_hiding {
+            transition: left 1s;
+            left: -200px !important;
+        }
+
+        #sidebar a {
+            color: rgb(0, 191, 255);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        #sidebar svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.25rem;
+        }
+
+        #sidebar .nav_link_active {
+            color: #fd7e14;
+        }
+    </style>
+    <script>
+        function sidebar_animation() {
+            if ($(window).width() > 992) {
+                sidebar_show();
+            } else {
+                sidebar_hide();
+            }
+        }
+
+        function sidebar_show() {
+            $("#nav_header_toggler").removeClass('toggler_sidebar_hiding').addClass('toggler_sidebar_showing');
+            $('#sidebar').removeClass('sidebar_hiding').addClass('sidebar_showing');
+        }
+
+        function sidebar_hide() {
+            $("#nav_header_toggler").removeClass('toggler_sidebar_showing').addClass('toggler_sidebar_hiding');
+            $('#sidebar').removeClass('sidebar_showing').addClass('sidebar_hiding');
+        }
+
+        $(function () {
+            sidebar_animation();
+            $(window).resize(sidebar_animation);
+        })
+
+        $(function () {
+            let nav_header_toggler_width = $('#nav_header_toggler').outerWidth(true);
+            $('#web_name').css('margin-right', nav_header_toggler_width);
+
+            let nav_header_height = $('#nav_header').outerHeight(true);
+            $('#container').css('margin-top', nav_header_height);
+        })
+
+        $(function () {
+            $('#nav_header_toggler').click(function () {
+                let toggler_state = $('#nav_header_toggler').attr('class');
+                if (toggler_state.search(/toggler_sidebar_showing/) == -1) {
+                    sidebar_show();
+                } else {
+                    sidebar_hide();
+                }
+            })
+        })
+
+        $(function () {
+            $(".nav-link").mouseenter(function () {
+                if ($(this).attr('class').search(/nav_link_active/) === -1) {
+                    $(this).css('color', '#fd7e14');
+                    $(this).children(".nav_header_svg").css('fill', '#fd7e14');
+                }
+            })
+            $(".nav-link").mouseleave(function () {
+                if ($(this).attr('class').search(/nav_link_active/) === -1) {
+                    $(this).css('color', 'rgb(0, 191, 255)');
+                    $(this).children(".nav_header_svg").css('fill', 'rgb(0, 191, 255)');
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <nav id="nav_header" class="navbar fixed-top">
+        <svg id="nav_header_toggler"
+             viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+             width='2rem' height='2rem'>
+            <path
+                    d="M1021.739773 461.265276A509.901399 509.901399 0 0 0 512.303825 0.003491c-16.988956 0-34.443362 0-51.432318 2.55998A511.995927 511.995927 0 0 0 512.303825 1023.995345a471.501704 471.501704 0 0 0 51.199593-2.559979 511.995927 511.995927 0 0 0 458.236355-560.17009z m-465.450843 490.817914c-14.894427 1.396353-29.556129 2.094529-44.21783 2.094529a442.178301 442.178301 0 0 1-43.519654-882.262073C483.445873 69.821117 498.3403 69.821117 512.303825 69.821117a442.178301 442.178301 0 0 1 43.054203 882.262073z">
+            </path>
+            <path
+                    d="M733.392976 488.726876h-442.178301a34.908813 34.908813 0 0 0 0 69.817626h442.178301a34.908813 34.908813 0 0 0 0-69.817626zM733.392976 349.091623h-442.178301a34.908813 34.908813 0 0 0 0 69.817627h442.178301a34.908813 34.908813 0 0 0 0-69.817627zM733.392976 628.362129h-442.178301a34.908813 34.908813 0 0 0 0 69.817626h442.178301a34.908813 34.908813 0 0 0 0-69.817626z">
+            </path>
+        </svg>
+        <div id="web_title" class="flex-grow-1 d-flex justify-content-center align-items-center">
+            <svg id="web_icon" viewBox="0 0 256 256"
+                 preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(0.000000,256.000000) scale(0.100000,-0.100000)" stroke="none">
+                    <path d="M2030 2258 c-108 -38 -158 -75 -317 -231 l-152 -150 -473 113 c-260
+                            62 -479 115 -486 118 -12 4 -205 -177 -223 -210 -6 -12 -6 -25 0 -36 6 -10
+                            167 -105 359 -210 191 -106 356 -198 365 -205 15 -11 -4 -33 -166 -195 l-184
+                            -184 -148 41 c-98 27 -153 37 -164 32 -28 -15 -161 -158 -161 -173 0 -24 20
+                            -42 202 -177 l176 -132 138 -182 c143 -188 150 -197 173 -197 14 0 157 134
+                            172 162 6 12 -3 62 -31 164 l-41 148 182 182 c101 101 186 181 190 179 4 -3
+                            94 -163 200 -357 184 -334 217 -388 238 -388 16 0 209 148 219 167 6 13 -25
+                            163 -104 508 -63 270 -114 496 -114 504 0 8 69 84 153 170 159 163 198 219
+                            231 330 20 67 20 111 2 156 -30 71 -124 92 -236 53z"></path>
+                </g>
+            </svg>
+            <span id="web_name" class="ml-2">SoraPort</span>
+        </div>
+    </nav>
+    <div id="sidebar">
+        <nav class="nav flex-column align-items-center">
+            <a class="nav-link nav_link_active" href="user">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-circle"
+                     viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd"
+                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+                账户信息
+            </a>
+            <a class="nav-link" href="node">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                </svg>
+                节点列表
+            </a>
+            <a class="nav-link" href="topup">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-battery-charging"
+                     viewBox="0 0 16 16">
+                    <path d="M9.585 2.568a.5.5 0 0 1 .226.58L8.677 6.832h1.99a.5.5 0 0 1 .364.843l-5.334 5.667a.5.5 0 0 1-.842-.49L5.99 9.167H4a.5.5 0 0 1-.364-.843l5.333-5.667a.5.5 0 0 1 .616-.09z"/>
+                    <path d="M2 4h4.332l-.94 1H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h2.38l-.308 1H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+                    <path d="M2 6h2.45L2.908 7.639A1.5 1.5 0 0 0 3.313 10H2V6zm8.595-2-.308 1H12a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H9.276l-.942 1H12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.405z"/>
+                    <path d="M12 10h-1.783l1.542-1.639c.097-.103.178-.218.241-.34V10zm0-3.354V6h-.646a1.5 1.5 0 0 1 .646.646zM16 8a1.5 1.5 0 0 1-1.5 1.5v-3A1.5 1.5 0 0 1 16 8z"/>
+                </svg>
+                氪金支援
+            </a>
+            <a class="nav-link" href="bulletin">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                </svg>
+                公告评论
+            </a>
+        </nav>
+    </div>
+    <div class="container-fluid" id="container">
+        <h1>test</h1>
+    </div>
+</body>
+
+</html>
